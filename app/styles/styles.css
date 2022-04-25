@@ -1,5 +1,5 @@
 body {
-  background-color: grey;
+  background-color: rgb(46, 46, 46);
   color: white;
 }
 
@@ -10,21 +10,88 @@ body {
   grid-template-rows: repeat(10, 20px);
   width: fit-content;
   user-select: none;
+  background-color: rgb(68, 68, 68);
 }
 
 .grid div {
   background-color: black;
-  border-radius: 2px;
+  /* border-radius: 2px; */
   margin-top: 1px;
   margin-left: 1px;
+  line-height: 20px;
+  transition: 200ms;
 }
 .grid .stone {
   background-color: rgb(37, 37, 37);
 }
 .grid .grass {
-  background-color: rgb(0, 82, 0);
+  background-color: rgb(0, 105, 0);
 }
 .grid .dirt {
   background-color: rgb(82, 56, 0);
 }
+
+.grid .player {
+  background-color: rgb(0, 105, 0);
+}
+.grid .player::before {
+  content: '👨';
+}
+.grid .question {
+  background-color: rgb(80, 80, 80);
+}
+.grid .question::before {
+  padding-left: 2px;
+  content: '❔';
+}
+
+.grid .fog {
+  background-color: rgb(80, 80, 80);
+}
+.grid .candy {
+  background-color: rgb(0, 105, 0);
+
+}
+.grid .candy[data-type='1']::before {
+  content: '🍬';
+  margin-left: -1px;
+}
+.grid .candy[data-type='2']::before {
+  content: '🍭';
+  margin-left: -1px;
+}
+.grid .candy[data-type='3']::before {
+  content: '🍰';
+  margin-left: -1px;
+}
+.grid .candy[data-type='4']::before {
+  content: '🎂';
+  margin-left: -1px;
+}
+.grid .candy[data-type='5']::before {
+  content: '🍩';
+  margin-left: -1px;
+}
+.grid .candy[data-type='6']::before {
+  content: '🍪';
+  margin-left: -1px;
+}
+.grid .candy[data-type='7']::before {
+  content: '🧁';
+  margin-left: -1px;
+}
+.grid .candy[data-type='8']::before {
+  content: '🍫';
+  margin-left: 2px;
+}
+.grid .candy[data-type='9']::before {
+  content: '🍨';
+  margin-left: -1px;
+}
+.grid .candy[data-type='10']::before {
+  content: '🍧';
+  margin-left: -1px;
+}
+
+
 
