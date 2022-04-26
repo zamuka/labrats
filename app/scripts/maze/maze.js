@@ -91,9 +91,6 @@ export class Maze {
    */
   getFoggedCell({ x, y }) {
     const cell = this.cells[x + y * this.width];
-    if (!cell.seen && cell.material === Materials.candy) {
-      return Materials.question;
-    }
     return cell.seen ? cell.material : Materials.fog;
   }
 

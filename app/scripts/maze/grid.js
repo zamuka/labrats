@@ -1,4 +1,4 @@
-import { Maze } from "./maze.js";
+import { Game } from "../game/game.js";
 
 /**
  *
@@ -28,18 +28,18 @@ export class Grid {
 
 
   /**
-   * @type Maze
+   * @type Game
    */
-  maze;
+  game;
   /**
    * @param {HTMLElement | string} root DOM node or selector
-   * @param {Maze} maze root DOM node or selector
+   * @param {Game} game root DOM node or selector
    */
-  constructor(root, maze) {
+  constructor(root, game) {
+    this.game = game;
     this.root = root instanceof Element ? root : document.querySelector(root);
-    this.width = maze.width;
-    this.height = maze.height;
-    this.maze = maze;
+    this.width = game.width;
+    this.height = game.height;
     this.init();
   }
 
@@ -93,7 +93,7 @@ export class Grid {
 
   update() {
     this.forEachCell((x, y) => {
-      this.setCell({ x, y }, this.maze.getFoggedCell({ x, y }));
+      this.setCell({ x, y }, this.game.getCell({ x, y }));
     })
   }
 

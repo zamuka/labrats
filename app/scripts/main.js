@@ -6,20 +6,12 @@ import { MazeMaker } from './maze/mazeMaker.js';
 import { randomInt } from './tools/random.js';
 
 const maze = new Maze(MAZE_WIDTH, MAZE_HEIGHT);
-const grid = new Grid('#maze', maze);
-
 MazeMaker.create(maze);
 const game = new Game(maze);
+game.addCandies(10);
 
-for (let i = 0; i < 10; i = i + 1) {
-  const cellPosition = maze.getRandom(Materials.grass);
-  const cell = grid.getCell(cellPosition);
-  if (cell) {
-    cell.dataset['type'] = String(randomInt(10) + 1);
-  }
-  maze.setCell(cellPosition, Materials.candy);
+const grid = new Grid('#maze', game);
 
-}
 
 
 /**
