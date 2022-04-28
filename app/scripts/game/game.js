@@ -1,6 +1,7 @@
 import { Materials } from '../config/constants.js';
 import { Maze } from '../maze/maze.js';
 import { randomInt } from '../tools/random.js';
+import { play } from '../services/sound-service.js';
 
 
 const withPosition = pos => obj => (pos.x === obj.position.x && pos.y === obj.position.y);
@@ -43,6 +44,7 @@ export class Game {
 
     const obj = this.objects.find(withPosition(newPosition));
     if (obj?.objectType === 'candy') {
+      play('chew');
       this.objects = this.objects.filter(o => o !== obj);
     }
 

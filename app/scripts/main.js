@@ -3,7 +3,7 @@ import { Game } from './game/game.js';
 import { Grid } from './maze/grid.js';
 import { Maze } from './maze/maze.js';
 import { MazeMaker } from './maze/mazeMaker.js';
-import { randomInt } from './tools/random.js';
+import { play } from './services/sound-service.js';
 
 const maze = new Maze(MAZE_WIDTH, MAZE_HEIGHT);
 MazeMaker.create(maze);
@@ -20,6 +20,9 @@ const grid = new Grid('#maze', game);
  */
 function move(dx, dy) {
   const result = game.move(dx, dy);
+  if (result) {
+    play('step');
+  }
   grid.update();
   return result;
 }
@@ -61,14 +64,22 @@ function handleMouseDown() {
 function handleMouseUp() {
   follow = false;
 }
-function handleMouseClick() {
-  follow = !follow;
+
+/**
+ *
+ * @param {MouseEvent} evt
+ */
+function handleMouseClick(evt) {
+  // follow = !follow;
+  mouseX = evt.clientX;
+  mouseY = evt.clientY;
+  moveToMouse();
 }
 
 function moveToMouse() {
-  if (!follow) {
-    return;
-  }
+  // if (!follow) {
+  //   return;
+  // }
   const p = grid.getCell(game.playerPosition);
   if (!p) {
     return;
@@ -93,7 +104,7 @@ function moveToMouse() {
   }
 }
 
-setInterval(moveToMouse, 200);
+// setInterval(moveToMouse, 200);
 
 
 
@@ -109,5 +120,6 @@ function storeMousePos(evt) {
 window.addEventListener('keydown', keyHandler);
 // window.addEventListener('mousedown', handleMouseDown);
 // window.addEventListener('mouseup', handleMouseUp);
-// window.addEventListener('click', handleMouseClick);
+window.addEventListener('click', handleMouseClick);
+window.addEventListener('touch', handleMouseClick);
 // window.addEventListener('mousemove', storeMousePos);

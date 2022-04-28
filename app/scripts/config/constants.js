@@ -1,4 +1,4 @@
-export const MAZE_WIDTH = 31;
+export const MAZE_WIDTH = 41;
 export const MAZE_HEIGHT = 19;
 
 export const Materials = {
