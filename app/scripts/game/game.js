@@ -3,7 +3,11 @@ import { Maze } from '../maze/maze.js';
 import { randomInt } from '../tools/random.js';
 import { play } from '../services/sound-service.js';
 
-
+/**
+ *
+ * @param {Point} pos
+ * @returns (Point) => boolean
+ */
 const withPosition = pos => obj => (pos.x === obj.position.x && pos.y === obj.position.y);
 export class Game {
 
@@ -36,19 +40,35 @@ export class Game {
     if (this.maze.getCell(newPosition) === Materials.stone) {
       return false;
     }
-    const result = this.maze.getCell(this.playerPosition);
-    this.maze.setCell(this.playerPosition, Materials.grass);
+
     this.playerPosition = newPosition;
-    this.maze.setCell(this.playerPosition, Materials.player);
+
     this.maze.unfog(this.playerPosition);
 
-    const obj = this.objects.find(withPosition(newPosition));
-    if (obj?.objectType === 'candy') {
-      play('chew');
-      this.objects = this.objects.filter(o => o !== obj);
-    }
+    this.processObjects();
 
-    return result;
+    return true;
+  }
+
+  get activeObjects() {
+    return this.objects
+      .filter(Boolean)
+      .filter(obj => !obj.deactivated);
+  }
+  processObjects() {
+    const touchedObjects = this.activeObjects.filter(withPosition(this.playerPosition));
+    touchedObjects.forEach(obj => this.touchObject(obj));
+  }
+
+  /**
+   *
+   * @param {GameObject} obj
+   */
+  touchObject(obj) {
+    if (obj.objectType === 'candy') {
+      play('chew');
+      obj.deactivated = true;
+    }
   }
 
   /**
@@ -71,7 +91,7 @@ export class Game {
    */
   getCell(position) {
     const cellMaterial = this.maze.getFoggedCell(position);
-    const item = this.objects.find(obj =>
+    const item = this.activeObjects.find(obj =>
       obj.position.x === position.x &&
       obj.position.y === position.y);
     if (item?.objectType === 'candy') {

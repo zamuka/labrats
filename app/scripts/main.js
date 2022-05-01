@@ -1,5 +1,6 @@
 import { Materials, MAZE_HEIGHT, MAZE_WIDTH } from './config/constants.js';
 import { Game } from './game/game.js';
+import { Player } from './game/player.js';
 import { Grid } from './maze/grid.js';
 import { Maze } from './maze/maze.js';
 import { MazeMaker } from './maze/mazeMaker.js';
@@ -12,7 +13,7 @@ game.addCandies(10);
 
 const grid = new Grid('#maze', game);
 
-
+const player = new Player(grid);
 
 /**
  * @param {number} dx
@@ -20,6 +21,7 @@ const grid = new Grid('#maze', game);
  */
 function move(dx, dy) {
   const result = game.move(dx, dy);
+  player.setPosition(game.playerPosition);
   if (result) {
     play('step');
   }
@@ -121,5 +123,5 @@ window.addEventListener('keydown', keyHandler);
 // window.addEventListener('mousedown', handleMouseDown);
 // window.addEventListener('mouseup', handleMouseUp);
 window.addEventListener('click', handleMouseClick);
-window.addEventListener('touch', handleMouseClick);
+// window.addEventListener('touch', handleMouseClick);
 // window.addEventListener('mousemove', storeMousePos);

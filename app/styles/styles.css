@@ -11,10 +11,10 @@ body {
   width: fit-content;
   user-select: none;
   background-color: rgb(68, 68, 68);
+  position: relative;
 }
 
 .grid div {
-  background-color: black;
   /* border-radius: 2px; */
   margin-top: 1px;
   margin-left: 1px;
@@ -33,10 +33,12 @@ body {
 }
 
 .grid .player {
-  background-color: rgb(0, 105, 0);
-}
-.grid .player::before {
-  content: '👨';
+  position: absolute;
+  background-color: transparent;
+  margin-top: 0;
+  margin-left: 0;
+  line-height: 21px;
+  transition: 200ms;
 }
 .grid .question {
   background-color: rgb(80, 80, 80);

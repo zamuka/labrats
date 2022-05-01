@@ -1,3 +1,4 @@
+import { CELL_SIZE } from "../config/constants.js";
 import { Game } from "../game/game.js";
 
 /**
@@ -74,8 +75,8 @@ export class Grid {
       cell.id = cellId(x, y);
       cells.push(cell);
     })
-    this.root.style.gridTemplateColumns = `repeat(${this.width}, 20px)`
-    this.root.style.gridTemplateRows = `repeat(${this.height}, 20px)`
+    this.root.style.gridTemplateColumns = `repeat(${this.width}, ${CELL_SIZE}px)`
+    this.root.style.gridTemplateRows = `repeat(${this.height}, ${CELL_SIZE}px)`
     this.root.append(...cells);
   }
 
